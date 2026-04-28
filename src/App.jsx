@@ -1,17 +1,17 @@
-import React from 'react'
-import  {fetchPhotos, fetchVideos } from './api/mediApi'
-import Tabs from './components/Tabs'
-import SearchBar from './components/SearchBar'
-import ResultGrid from './components/ResultGrid'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import CollectionPage from "./pages/CollectionPage";
 
 function App() {
   return (
-    <div className='bg-gray-700 h-screen w-full text-white gap-3 '>
-  <SearchBar/>
-  <Tabs/>
-  <ResultGrid/>
+    <div className="bg-gray-900 min-h-screen w-full text-white gap-3 ">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/collection" element={<CollectionPage />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

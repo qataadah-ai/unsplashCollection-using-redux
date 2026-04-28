@@ -30,7 +30,7 @@ function ResultGrid() {
               type: "photo",
               title: item.alt_description,
               thumbnail: item.urls.small,
-              src: item.urls.full,
+              src: item.urls.regular,
               url: item.links.html,
             }));
           }
@@ -61,13 +61,15 @@ function ResultGrid() {
   if (loading) return <h1>Loading...</h1>;
 
   return (
-    <div className='flex justify-between w-full flex-wrap gap-6 overflow-auto px-10'>
-            {results.map((item, idx) => {
-                return <div key={idx}>
-                    <ResultCard item={item} />
-                </div>
-            })}
-        </div>
+    <div className="flex justify-between items-center w-full flex-wrap gap-6 overflow-auto px-10 mt-10">
+      {results.map((item, idx) => {
+        return (
+          <div key={idx}>
+            <ResultCard item={item} />
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
