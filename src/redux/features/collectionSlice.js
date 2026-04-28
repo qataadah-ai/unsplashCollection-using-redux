@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { toast } from "react-toastify";
 const initialState = {
   items: JSON.parse(localStorage.getItem("collection")) || [],
 };
 
 const collectionSlice = createSlice({
-        initialState,
-    name: "collection",
+  initialState,
+  name: "collection",
 
   reducers: {
-
     addCollection: (state, action) => {
       const alreadyExist = state.items.find(
         (item) => item.id === action.payload.id,
       );
 
       if (!alreadyExist) {
-        state.items.push(action.payload);
+       state.items.push(action.payload);
+
         localStorage.setItem("collection", JSON.stringify(state.items));
       }
     },
-    removeColection: (state, action) => {
+    removeCollection: (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
 
       localStorage.setItem("collection", JSON.stringify(state.items));
@@ -29,9 +29,38 @@ const collectionSlice = createSlice({
       state.items = [];
       localStorage.removeItem("collection");
     },
+    addToast: () => {
+      toast.success("Collection added", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    },
+    removeToast: () => {
+      toast.error("Removed from Collection", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    },
   },
 });
-export const { addCollection, removeCollection, clearCollection } =  collectionSlice.actions;
-
+export const {
+  addCollection,
+  removeCollection,
+  clearCollection,
+  addToast,
+  removeToast,
+} = collectionSlice.actions;
 
 export default collectionSlice.reducer;
